@@ -22,7 +22,6 @@ const App = () => {
   }
 
   const handleSumNumbers = () => {
-
     if(firstNumber === '0'){
         setFirstNumber(String(currentNumber));
         setCurrentNumber('0')
@@ -32,11 +31,9 @@ const App = () => {
       setCurrentNumber(String(sum))
       setOperation('')
     }
-
   }
 
   const handleMinusNumbers = () => {
-
     if(firstNumber === '0'){
         setFirstNumber(String(currentNumber));
         setCurrentNumber('0')
@@ -46,11 +43,33 @@ const App = () => {
       setCurrentNumber(String(sum))
       setOperation('')
     }
+  }
 
+  const handleMultiplyNumbers = () => {
+    if(firstNumber === '0'){
+        setFirstNumber(String(currentNumber));
+        setCurrentNumber('0')
+        setOperation('*')
+    }else {
+      const multiply = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(multiply))
+      setOperation('')
+    }
+  }
+
+  const handleDivideNumbers = () => {
+    if(firstNumber === '0'){
+        setFirstNumber(String(currentNumber));
+        setCurrentNumber('0')
+        setOperation('/')
+    }else {
+      const division = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(division))
+      setOperation('')
+    }
   }
 
   const handleEquals = () => {
-
     if(firstNumber !== '0' && operation !== '' && currentNumber !== '0'){
         switch(operation){
           case '+':
@@ -59,11 +78,16 @@ const App = () => {
           case '-':
             handleMinusNumbers();
             break;
+          case '*':
+            handleMultiplyNumbers();
+            break;
+          case '/':
+            handleDivideNumbers();
+            break;
           default: 
             break;
         }
     }
-
   }
 
   return (
@@ -71,8 +95,8 @@ const App = () => {
       <Content>
         <Input value={currentNumber}/>
         <Row>
-          <Button label="x"/>
-          <Button label="/"/>
+          <Button label="x" onClick={handleMultiplyNumbers}/>
+          <Button label="/" onClick={handleDivideNumbers}/>
           <Button label="c" onClick={handleOnClear}/>
           <Button label="."/>
         </Row>
